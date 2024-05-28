@@ -6,9 +6,6 @@ export const gastronomyschema = z.object({
     }),
     address: z.string({
         required_error: 'address is required'
-    }),
-    photo_url: z.string({
-        required_error: 'photo_url is required'
-    }),
+    })
 })
 

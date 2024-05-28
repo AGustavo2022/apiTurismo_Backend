@@ -1,5 +1,6 @@
 package-lock.json
 node_modules
+public/uploads
 dotenv environment variable files
 .env
 .env.development.local

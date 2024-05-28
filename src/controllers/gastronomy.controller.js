@@ -9,10 +9,23 @@ export async function handleGet(req, res, next){
     }catch (error){
         next(error)
     }
-}
+} 
 
 export async function handlePost(req, res, next){
+    if(!req.file){
+        return res.status(400).json({message:'No image file found'})
+    }
+    if(req.file.mimetype !== 'image/jpeg'){
+        return res.status(400).json({message:'No JPEG file found'})
+    }
+    if(req.file.size > 50000){
+        return res.status(400).json({message:'image oversized'})
+    }
+    console.log(req.file)
     const gastronomy = req.body
+    gastronomy.photo_url = `./uploads/${req.file.filename}`
+
+    console.log(req.file)
     try{
         const newGastronomy = await gastronomyServices.postGastronomy(gastronomy)
         res.json(newGastronomy)
