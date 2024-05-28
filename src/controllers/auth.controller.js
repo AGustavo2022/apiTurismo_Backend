@@ -21,10 +21,11 @@ export async function handleRegister(req, res, next){
   const userBody = req.body
   try{
       const userPost = await usersServices.postUser(userBody)
-      const access_token = criptografidor.generarToken(userPost)
+      const userPostNew = {userId: userPost}
+      const access_token = criptografidor.generarToken(userPostNew)
       //httpOnly: false, para developer. en true no toma la cookie el frontend con React
       res.cookie('authToken', access_token, { httpOnly: false, signed: true, maxAge: 1000 * 60 * 60 })
-      res.json({ status: 'success', massage: 'Registro exitoso', playload: userPost });       
+      res.json({ status: 'success', massage: 'Registro exitoso', playload: userPostNew });       
   }catch (error){
       next(error)
   }

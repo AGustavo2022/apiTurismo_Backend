@@ -1,6 +1,6 @@
 
 import { NotFound } from "../models/errors/createErrorFactory.js"
-import { User, UserPublico } from "../models/users.models.js"
+import { User } from "../models/users.models.js"
 import { usersRepository } from "../repositories/users.repository.js"
 import { criptografidor } from "../utils/cryptography.js"
 
@@ -15,8 +15,8 @@ class AuthService {
             const passwordGood = await criptografidor.comparar(password, userSearched.password)
             if (passwordGood) {
                 await usersRepository.updateOne({id: userSearched.id},{updatedAt: new(Date)})
-                const userPublico = new UserPublico(userSearched)
-                return userPublico.dtoP()
+                const userPublico = new User(userSearched)
+                return userPublico.publicoDto()
             }else{
                 if(!passwordGood) throw new NotFound('the password is invalid')
             }

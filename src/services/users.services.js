@@ -1,5 +1,5 @@
 import { NotFound } from "../models/errors/createErrorFactory.js";
-import { User, UserPublico } from "../models/users.models.js";
+import { User } from "../models/users.models.js";
 import { usersRepository } from "../repositories/users.repository.js";
 import { criptografidor } from "../utils/cryptography.js";
 
@@ -30,9 +30,8 @@ class UsersServices {
         const userFom = await usersRepository.readOne({user:datosUsuarios.user})
         if(userFom) throw new NotFound('The user is already in use')
         datosUsuarios.password = criptografidor.hashear(datosUsuarios.password)        
-        const usuarioRegistrado = await usersRepository.create(datosUsuarios)
-        const usuarioRegistradoPublico = new UserPublico(usuarioRegistrado)     
-        return  usuarioRegistradoPublico.dto()
+        const usuarioRegistrado = await usersRepository.create(datosUsuarios)    
+        return  usuarioRegistrado.id
     }
 
     async getPut (uid, update){

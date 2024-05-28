@@ -24,34 +24,41 @@ export class User {
     return {
       id: this.#id,
       user: this.#user,
+      password: this.#password,
       role: this.#role
     }
   }
-}
 
-export class UserPublico {
-
-  #id
-  #user
-  #password
-  #role
-
-  constructor({
-    id,
-    user,
-    password,
-    role
-
-  }) {
-    this.#id = id
-    this.#user = user
-    this.#password = password
-    this.#role = role
-  }
-
-  dtoP() {
+  publicoDto() {
     return {
-      id: this.#id,
+      id: this.#id
     }
   }
 }
+
+// export class UserPublico {
+
+//   #id
+//   #user
+//   #password
+//   #role
+
+//   constructor({
+//     id,
+//     user,
+//     password,
+//     role
+
+//   }) {
+//     this.#id = id
+//     this.#user = user
+//     this.#password = password
+//     this.#role = role
+//   }
+
+//   dtoP() {
+//     return {
+//       id: this.#id,
+//     }
+//   }
+// }
