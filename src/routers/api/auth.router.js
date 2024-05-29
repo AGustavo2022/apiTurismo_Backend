@@ -7,7 +7,7 @@ import { isAuthenticated, isCheckRol } from "../../middlewares/authentication.mi
 
 export const authRouter = Router()
 
-authRouter.get('/current', isAuthenticated, isCheckRol('administrator'), authController.handleCurrent)
+authRouter.get('/current', isAuthenticated, authController.handleCurrent)
 authRouter.post('/login',validateShema(loginschema), authController.handleLogin)
-authRouter.post('/register', validateShema(registerschema), authController.handleRegister )
+authRouter.post('/register', isAuthenticated, isCheckRol('developer'), validateShema(registerschema), authController.handleRegister )
 authRouter.delete('/logout', authController.handlelogout)
