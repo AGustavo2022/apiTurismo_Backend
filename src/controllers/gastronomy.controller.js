@@ -23,7 +23,7 @@ export async function handlePost(req, res, next){
     }
     console.log(req.file)
     const gastronomy = req.body
-    gastronomy.photo_url = `./uploads/${req.file.filename}`
+    gastronomy.photo_url = `uploads/${req.file.filename}`
 
     console.log(req.file)
     try{
